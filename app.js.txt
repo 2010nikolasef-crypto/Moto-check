@@ -1,0 +1,92 @@
+// -------------------
+// Αρχικοποίηση τιμών
+// -------------------
+let totalHours = parseFloat(localStorage.getItem("totalHours")) || 0;
+let lastOilChange = parseFloat(localStorage.getItem("lastOilChange")) || 0;
+let lastAirChange = parseFloat(localStorage.getItem("lastAirChange")) || 0;
+let lastPlugChange = parseFloat(localStorage.getItem("lastPlugChange")) || 0;
+
+// διαστήματα service
+const OIL_INTERVAL = 12;
+const AIR_INTERVAL = 8;
+const PLUG_INTERVAL = 10;
+
+// -------------------
+// Προσθήκη ωρών
+// -------------------
+function addHours() {
+const input = document.getElementById("addHours");
+const value = parseFloat(input.value);
+
+if (!isNaN(value)) {
+totalHours += value;
+saveData();
+updateUI();
+input.value = "";
+}
+}
+
+// -------------------
+// Reset service
+// -------------------
+function resetOil() {
+lastOilChange = totalHours;
+saveData();
+updateUI();
+}
+
+function resetAir() {
+lastAirChange = totalHours;
+saveData();
+updateUI();
+}
+
+function resetPlug() {
+lastPlugChange = totalHours;
+saveData();
+updateUI();
+}
+
+// -------------------
+// Υπολογισμός μηνυμάτων service
+// -------------------
+function serviceMessage(interval, lastChange) {
+const used = totalHours - lastChange;
+const left = interval - used;
+
+if (left <= 0) {
+return "❌ ΑΛΛΑΓΗ ΤΩΡΑ";
+} else if (left <= 3) {
+return `⚠️ Σε ${left.toFixed(1)} ώρες`;
+} else {
+return `✅ ΟΚ – μένουν ${left.toFixed(1)} ώρες`;
+}
+}
+
+// -------------------
+// Ενημέρωση οθόνης
+// -------------------
+function updateUI() {
+document.getElementById("totalHours").innerText = totalHours.toFixed(1);
+document.getElementById("oilStatus").innerText =
+serviceMessage(OIL_INTERVAL, lastOilChange);
+document.getElementById("airStatus").innerText =
+serviceMessage(AIR_INTERVAL, lastAirChange);
+document.getElementById("plugStatus").innerText =
+serviceMessage(PLUG_INTERVAL, lastPlugChange);
+}
+
+// -------------------
+// Αποθήκευση στο κινητό
+// -------------------
+function saveData() {
+localStorage.setItem("totalHours", totalHours);
+localStorage.setItem("lastOilChange", lastOilChange);
+localStorage.setItem("lastAirChange", lastAirChange);
+localStorage.setItem("lastPlugChange", lastPlugChange);
+}
+
+// -------------------
+// Αρχική εκκίνηση
+// -------------------
+updateUI();

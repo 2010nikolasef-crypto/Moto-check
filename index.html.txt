@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Service Μηχανής</title>
+
+<!-- Για να λειτουργεί σαν app στο iPhone -->
+<link rel="manifest" href="manifest.json">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Moto Service">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>🏍️ Service Μηχανής</h1>
+
+<div class="hours">
+<h2>Σύνολο ωρών</h2>
+<p id="totalHours">0</p>
+<input type="number" id="addHours" placeholder="Πρόσθεσε ώρες">
+<button onclick="addHours()">➕ Προσθήκη</button>
+</div>
+
+<!-- Service -->
+<div class="service">
+<h2>🛢️ Λάδια</h2>
+<p id="oilStatus">—</p>
+<button onclick="resetOil()">✔️ Άλλαξα λάδια</button>
+</div>
+
+<div class="service">
+<h2>🌬️ Φίλτρο Αέρα</h2>
+<p id="airStatus">—</p>
+<button onclick="resetAir()">✔️ Άλλαξα φίλτρο</button>
+</div>
+
+<div class="service">
+<h2>🔥 Μπουζί</h2>
+<p id="plugStatus">—</p>
+<button onclick="resetPlug()">✔️ Άλλαξα μπουζί</button>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
